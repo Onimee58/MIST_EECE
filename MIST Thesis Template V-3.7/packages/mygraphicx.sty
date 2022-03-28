@@ -1,0 +1,37 @@
+% !TEX root = ../thesis.tex
+
+% For LQ images, append filename with '-lq'. eg. 'image-lq.png'.
+% Print - .pdf .png .jpg
+% LQ View - -lq.png -lq.jpg .png .jpg .pdf
+% HQ View - .png .jpg .pdf
+% Putting PDF last allows rastered versions of complex vector graphics to be used for viewing to improve rendering speed.
+
+\ProvidesPackage{packages/mygraphicx}
+
+\newif\if@lq
+\newif\if@print
+
+% Uses LQ images
+\DeclareOption{lq}{\@lqtrue}
+
+% For printing, uses .pdf over .png and .jpg
+% ignores LQ
+\DeclareOption{print}{\@printtrue}
+\DeclareOption{view}{\@printfalse}
+\ProcessOptions\relax
+
+
+\RequirePackage[]{graphicx}
+
+
+\if@print
+	\DeclareGraphicsExtensions{.pdf,.png,.gif,.jpg}
+\else
+	\if@lq
+		\DeclareGraphicsExtensions{-lq.png,-lq.jpg,.png,.gif,.jpg,.pdf}
+		\DeclareGraphicsRule{-lq.png}{png}{*}{}
+		\DeclareGraphicsRule{-lq.jpg}{jpg}{*}{}
+	\else
+		\DeclareGraphicsExtensions{.png,.gif,.jpg,.pdf}
+	\fi
+\fi
