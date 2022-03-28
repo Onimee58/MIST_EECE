@@ -1,4 +1,4 @@
-# Postgraduate (PG) and Undergraduate (UG) thesis template of MIST
+# Postgraduate (PG) and Undergraduate (UG) Thesis Template of MIST
 
 ## Usage
 - Download all the files in a single folder or clone it using git.
