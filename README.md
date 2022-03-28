@@ -3,7 +3,7 @@
 ## Usage
 - Download all the files in a single folder or clone it using git.
 
-- You can make a copy of the Overleaf version from [here](https://www.overleaf.com/read/zghvvggvfvyd)
+- You can make a copy of the Overleaf version from [here](https://www.overleaf.com/read/zghvvggvfvyd).
 
 - If you have Texmaker(editor) and MiKTeX(TeX distribution), you can use them locally.
 
