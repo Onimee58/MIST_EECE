@@ -10,7 +10,7 @@
 - General guidelines are writen inside the tex files.
 <br>
 <br>
-<i>If you find any issues or have any suggestions kindly open a issue. We will get it fixed as soon as possible.</i>
+<i>If you find any issues or have any suggestions kindly open an <b>issue</b>. We will get it fixed as soon as possible.</i>
 <br>
 <br>
 <B>Created by <br>
