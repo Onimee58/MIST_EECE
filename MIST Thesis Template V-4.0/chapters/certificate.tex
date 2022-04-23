@@ -1,0 +1,75 @@
+% !TEX root = ../thesis.tex
+
+\chapter*{APPROVAL CERTIFICATE}
+%\chapter*{Approval Certificate}
+%\addcontentsline{toc}{chapter}{APPROVAL CERTIFICSTE}
+
+\parbox{\textwidth}{\centering\MakeUppercase{\thetitle}
+
+\vspace{6pt}{\noindent\newline\theThesisType}
+
+\vspace{6pt}By
+
+\vspace{6pt}{\ifdefined\theStudyType\theauthor\else\authorswithroll\fi}
+}
+
+\noindent
+{~~~Approved as to style and content by the %
+\ifdefined\theStudyType Board of Examination on \theDefenseDay~\theDefenseDate\,:\else Examiners in \theDefenseDate\,:\fi
+}
+
+
+%\section*{Board of Examiners}
+\vspace{\ifdefined\theStudyType 4ex \else 8ex\fi}
+
+
+\begin{table*}[!h]
+\resizebox{\textwidth}{!}{
+		\begin{tabular}{llr}
+		\makebox[70mm]{\hrulefill}& \hspace{1.5cm} &\\
+		  %\cline{2-2}\\
+		\thesupervisor &  \hspace{1.5cm} &Chairman \\
+		\thesupervisorAffl & \hspace{1.5cm} &(Supervisor)\\
+		\thesupervisorUni,~\theMISTcity &  \hspace{1.5cm} &\ifdefined\theStudyType Board of Examination\fi\\
+			\vspace{\ifdefined\theStudyType 4ex \else 8ex\fi}\\
+%
+%
+\ifdefined\theStudyType%
+		\makebox[70mm]{\hrulefill}& \hspace{1.5cm} &\\
+		%\cline{2-2}\\
+		 \theInternal &  \hspace{1.5cm} &Member\\
+		 \theInternalAffl & \hspace{1.5cm} &(Internal)\\
+		 \theInternalUni,~\theMISTcity &  \hspace{1.5cm} &\ifdefined\theStudyType Board of Examination\fi\\
+		\vspace{4ex}\\
+		\fi
+%
+%
+		\makebox[70mm]{\hrulefill}& \hspace{1.5cm} &\\
+		%\cline{2-2}\\
+		 \thehead   &  \hspace{1.5cm} &Member\\
+		\theheadAffl & \hspace{1.5cm} &(Ex-officio)\\
+		 \theheadUni,~\theMISTcity &  \hspace{1.5cm} &\ifdefined\theStudyType Board of Examination\fi\\
+		\vspace{\ifdefined\theStudyType 4ex \else 8ex\fi}\\
+		%	
+%
+\ifdefined\theStudyType%
+		\makebox[70mm]{\hrulefill}& \hspace{1.5cm} &\\
+		  %\cline{2-2}\\
+			\theExternal   &  \hspace{1.5cm} &Member\\
+			\theExternalAffl & \hspace{1.5cm} &(External)\\
+			\theExternalUni,~\theExternalCity &  \hspace{1.5cm} &\ifdefined\theStudyType Board of Examination\fi\\\fi
+% 
+		\end{tabular}
+		}
+\end{table*}
+
+
+\vfill
+{\parbox{\textwidth}{\centering\quad\thedept\newline MIST, Dhaka}
+%
+%2. $---------------------------$ \hfill Member\\
+%\quad Gp Capt Md Hossam-E-Haider, PhD, BAF \hfill (Ex-officio)\\
+%\quad Professor and Head\\
+%\quad Dept. of EECE, MIST, Dhaka - 1216
+
+%\end{dedication}

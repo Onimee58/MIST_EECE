@@ -1,0 +1,96 @@
+
+\begin{appendices}
+\raggedbottom
+
+\chapter{MATLAB CODES}
+\label{matlab}
+%\setlength{\leftmargin}{2in}%
+\section{An Example of MATLAB Script}
+
+\begin{lstlisting}
+clc
+clear all
+close all
+
+%% Define the path of the test image for batch run
+path = strcat(cd, '\TestImage\');
+pathresult = strcat(cd, '\sResult\SIPIfull\');
+contents = dir(path); 
+
+Method = [];
+
+for F=1:numel(contents)-2
+    filename = contents(F+2).name;
+    I= imread(filename);
+  
+    load eqdata  				% the data bits to be embedded
+    Io= double(I(:,:)); % original test input image
+    Io(Io==0)=1;
+    Io(Io==255)=254;
+    
+    [M, N] = size(Io);
+    pxs =0;
+    pdx =1;
+    
+    tic
+    Iw = Io;
+    x=1;
+    for i=1:1:M
+        for j=1:3:N-2
+            if pdx +1 <= numel(eqdata)
+                [ Iw(i,j:j+2), Iems(x:x+2, :), unusedbit, pshifted] = jungembnew(Io(i,j:j+2), eqdata, pdx);
+                pxs = pxs + pshifted;
+                pdx = pdx+2-unusedbit;
+                x=x+3;
+            end
+        end
+    end
+    
+          
+
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{2.5ex}
+\subsection{An Example MATLAB Function: \func{MyFunction}}
+
+
+\begin{lstlisting}
+function [Iwfull, Ctot] = MyFunction(Io, eqdata)
+Io = double(Io);
+
+depth = ceil(log2(double(max(Io(:)+1))));
+MAX = 2^depth -1;
+Io(Io==0) = Io(Io==0)+1;
+Io(Io==MAX) = Io(Io==MAX)-1;
+k=mod(size(Io),3);
+Iop = Io(1:end-k(1), 1:end-k(2));
+pdx =1;
+[M, N] = size(Iop);
+
+Idx = double(reshape(1:M*N, [M,N]));
+%Block-wise zigzag scanning
+Izdx = im2col(Idx,[3 1],'distinct');
+Iopz = Iop(Izdx);
+
+pdx =1;
+[R, C] = size(Iopz);
+Iw = double(zeros(R, C));
+for j = 1:C
+        pix(1:3) = Iopz(:,j);
+        [Iw(:,j), unusedbit] = jungemb(pix, eqdata, pdx);
+        pdx = pdx+2-unusedbit;   
+end
+
+temp=sortrows([Iw(:), Izdx(:)],2);
+Iwnew= reshape(temp(:,1), [M, N]);
+
+Iwfull = uint8(Io);
+Iwfull(1:end-k(1), 1:end-k(2))=Iwnew(:,:);
+Ctot= pdx-2+unusedbit-1; %new line
+end
+
+
+\end{lstlisting}
+
+\end{appendices}

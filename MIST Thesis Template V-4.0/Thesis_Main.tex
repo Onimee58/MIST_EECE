@@ -1,0 +1,483 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Template of MIST Thesis 
+% Version 4.0 Date 31-03-2022
+% Email: h.nyeem@eece.mist.ac.bd 
+% -----------------------------------------------------
+% This LaTeX template was originally developed by Lt Col Hussain Md Abu Nyeem, PhD, EME for the MSc Thesis students of the Military Institute of Science and Technology (MIST). The successive developments received updates with the specific policy and guidelines of MIST with a notable contribution of Major Md Abdul Wahed.
+%
+% This version quickly attempts for the first time to capture the prescribed format of the undergrad and postgrad theses of MIST students. This means that there would be surely some bugs and rooms for improvement.
+%
+% The main objective of this template is to facilitate the existing BSc/MSc/PhD Students of MIST to easily typeset their thesis content. This means that once the input-data of the title page are given, most of the sections of the front- and back-matters will be generated automatically.
+%
+% Please send us the email for further development of this template
+
+%------------------------------------------------------
+%HOW TO USE (A Brief Guideline for the Beginner)
+%------------------------------------------------------
+%1. Input the data for the front matters starting lines from: 119
+%
+%2. Images are to be copied in the FIGURE folder
+%
+%3. Update the Chapters in the CHAPTERS folder with the desired content
+%
+%4. Typesetting of abstract in Bengali is not yet supported by this version. However, a pre-typeset Bengali-abstract (written with avro in word or googledoc, and saved as pdf) can be included in the abstract section.
+%
+%5. Update the ACKNOWLEDGMENT, ABSTRACT, ABBREVIATIONS, SYMBOLS, ListOfPublication, and INDEX files in the CHAPTERS folder as well. Other pages of the front- and back-matters will be generated automatically.
+%
+%6. Reference files (bibtex files) are to be stored in the main directory where this file resides and the name of the bibtex file should be included in the \bibliography{FILENAME} in the REFERENCE section at the end of this document. Or, you may use/update the bibliographies in the current MyReference.bib file without further changes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pdfoptionpdfminorversion=5
+%\RequirePackage{pdf14}
+\RequirePackage{etex}
+\makeatletter\let\MPtrue\@minipagetrue\makeatother
+
+\documentclass[final,print]{packages/mistthesis}
+\pdfminorversion=6
+
+\makeatletter % disable the runtime redefinitions
+\let\SS@makeulinesect\relax
+\let\SS@makeulinepartchap\relax
+\makeatother
+
+%\usepackage{mathpazo}
+\usepackage{notoccite}
+\renewcommand{\bibname}{REFERENCES}
+
+\usepackage[tight,footnotesize]{subfigure}
+%\usepackage[caption=false]{subfig}
+
+\usepackage{ragged2e}
+%\usepackage[banglamainfont=Kalpurush, banglattfont=Siyam Rupali]{latexbangla}
+
+%Table package
+\usepackage{tabularx, threeparttable, longtable, float, multirow, array, pdflscape, afterpage, paralist}
+\makeatletter
+\def\true@true@true{\fi\fi\iftrue\iftrue\iftrue}
+\makeatother
+
+\usepackage{changepage, calc,  enumitem, linegoal, datetime}
+\setlist[itemize]{itemsep=0cm}
+\usepackage{booktabs, makecell}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{label = \emph{Step} \arabic*:}
+
+%using minipage environment in table
+\makeatletter\let\MPtrue\@minipagetrue\makeatother
+\newcommand{\figref}[2][{}]{\hyperref[#2]{\figurename~\ref{#2}#1}} 
+\newcommand{\tabref}[2][{}]{\hyperref[#2]{\tablename~\ref{#2}#1}} 
+
+\usepackage{hyphenat}
+\def\hypp{--\penalty0\hskip0pt\relax}
+\sloppy
+\usepackage{emptypage, lscape, mdframed, rotating, afterpage}
+\newcommand\blankpage{
+	\null
+	\thispagestyle{empty}
+	\addtocounter{page}{-1}
+	\newpage
+}
+\usepackage{listings}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@afterheading}%
+{\clubpenalty \@M}{\clubpenalties 3 \@M \@M 0}{}{}
+\patchcmd{\@afterheading}%
+{\clubpenalty \@clubpenalty}{\clubpenalties 2 \@clubpenalty 0}{}{}
+\makeatother
+\appto\TPTnoteSettings{\footnotesize}
+\AtBeginEnvironment{algorithmic}{\small}
+% 
+\makeatletter
+\xpatchcmd{\algorithmic}{\itemsep\z@}{\itemsep=0.4ex plus1pt}{}{}
+\makeatother
+%
+\makeatletter
+\newcommand\fs@betterruled{%
+	\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
+	\def\@fs@pre{\vspace*{8pt}\hrule height.8pt depth0pt \kern2pt}%
+	\def\@fs@post{\kern2pt\hrule\relax}%
+	\def\@fs@mid{\kern2pt\hrule\kern2pt}%
+	\let\@fs@iftopcapt\iftrue}
+\floatstyle{betterruled}
+\restylefloat{algorithm}
+\makeatother
+%\topskip=-20pt
+\parskip=12pt
+\parindent=0pt
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%GIVE INPUT HERE FOR YOUR THESIS TITLE PAGE AND FRONT MATTERS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+% TITLE OF THE THESIS:
+% Write the title in initial captial format 
+% excluding that form for prepositions and conjuctions
+\title{Title of My Thesis on a Topic of an Interesting Area of Engineering}
+%% =========================================
+%% Uncomment/Comment the Correct Thesis Type
+%% =========================================
+\ThesisType{B.Sc. Engineering Thesis}
+% \ThesisType{M.Sc. Engineering Thesis}
+%\ThesisType{Ph.D. Thesis}
+
+%% =========================================
+%% PG ONLY
+%% Input F for full-timestudentship
+%% Or, input P for part-time studentship
+%% =========================================
+%  \StudyType{F}
+
+
+%===========================================================
+%% NAMES & ROLL-NUMBERS OF THE STUDENTS AS AUTHORS:
+%  For both the UG and PG students. 
+%  Only First student is to be enabled for the PG Students.
+%===========================================================
+%% First student:
+\FirstStudent{Student Name 1}  % Input the NAME of the first student
+\FirstRoll{XXXXXXXXXX}  % Input the Student Number of the first student
+
+%%Second student:
+\SecondStudent{Student Name 2}  % Input the NAME of the second student, otherwise comment
+\SecondRoll{XXXXXXXXXX}  % Input the Student Number of the second student, otherwise uncomment
+
+%% Third student:
+%\ThirdStudent{Student Name 3}  % Input the NAME of the second student, otherwise comment
+%\ThirdRoll{XXXXXXXXXX}  % Input the Student Number of the second student, otherwise uncomment
+
+%% Fourth student:
+%\FourthStudent{Student Name 4}  % Input the NAME of the fourth student, otherwise uncomment
+%\FourthRoll{XXXXXXXXXX}  % Input the Student Number of the fourth student, otherwise uncomment
+
+%========================================================
+%% ALL AUTHORS SUR NAMES FOR THE SPINE/SIDE OF HARD COVER
+%========================================================
+%   For multiple authors, include below all Surnames separated by \sep
+%   For single author, only one surname is to be given without \sep
+\AllSurNames{SURNAME1 \sep SURNAME2}
+
+%=======================================
+%% AUTHOR'S QUALIFICATION (FOR PG ONLY): 
+%=======================================
+%\qualifications{BSc Engg.\,(EEE), BUET} % For postgrad students only
+
+
+%===================================================
+% OTHER INFO (For all)
+%===================================================
+\session{20XX--20XX}
+%
+% DEGREE FOR THIS THESIS (No change for the BSc in EECE)
+\degree{Bachelor of Science in Electrical, Electronic and Communication Engineering}
+
+% LOGO OF MIST (NO CHANGE IS REQUIRED)
+\logo{\includegraphics[height=30mm, width=32mm]{logoMIST.png}}
+
+% NAME OF THE DEPARTMENT AWARDING THE DEGREE 
+%(NO NEED TO CHANGE FOR THE EECE DEPT STUDENTS)
+
+\dept{Department of Electrical, Electronic and Communication Engineering}    % Input the full form of the dept
+
+\deptShort{EECE} % Input the shaort form of the dept
+
+% CITY OF THE UNIVERSITY (MIST): No change required
+\MISTcity{Dhaka, Bangladesh}
+
+% NAME OF THE UNIVERSITY (NO NEED TO CHANGE FOR THE MIST STUDENTS)
+\university{Military Institute of Science and Technology}
+
+% DATE OF THESIS DEFENSE
+\DefenseDay{22}  % Day of the Defense
+\DefenseDate{March 2022} % Month and Year of the Defense
+
+
+%%%%%%%%%%%%%% SUPERVISOR AND EXAMINERS INFO %%%%%%%%%%%%
+%% information of the supervisor
+%% =============================
+\SupervisorName{%
+	Lieutenant Colonel Hussain Md. Abu Nyeem, PhD, EME}%
+\SupervisorAffiliations{Instructor Class A}
+\SupervisorInstitute{Department of EECE, MIST}
+%
+%% ===================================
+%% information of the Head of the Dept
+%% ===================================
+\HeadName{Brigadier General A K M Nazrul Islam, PhD}%
+\HeadAffiliations{Head of the Department}
+\HeadInstitute{Department of EECE, MIST}
+%======================================
+%% Information of the Internal Member
+%% ====================================
+\InternalName{Md Golam Mostafa, PhD}%
+\InternalAffiliations{Professor}
+\InternalInstitute{Department of EECE, MIST}
+%% =============================================================
+%%  Uncomment the EXRTERNAL MEMBER BLOCK for the POSTGRAD thesis
+%%  information of the External Member
+%% =============================================================
+% \ExternalName{Dr. Satya Prasad Majumder}%
+% \ExternalAffiliations{Professor}
+% \ExternalInstitute{Department of EEE, BUET}
+% \ExternalCity{Dhaka\hypp 1205}
+
+
+%%%%%%%% DO NOT EDIT THIS SECTION %%%%%%%%%%%%%%%%%%%%%%%%
+%% =======================================================
+%%%%%% DO NOT CHANGE the following block unknowingly %%%
+%% =======================================================
+% \ifdefined\@StudyType
+% \author{\parbox{\textwidth}{\centering\@FirstStudent~(SN.~\@FirstRoll)}\fi}
+% %\\SN.~\@FirstRoll (\@StudyType)}}%
+% \else
+% \makeatletter
+\def\authorswithroll{\ifdefined\@FirstStudent
+	\parbox{\textwidth}{\centering\@FirstStudent~(SN.~\@FirstRoll)}\fi\newline
+	\ifdefined\@SecondStudent
+	\parbox{\textwidth}{\centering\@SecondStudent~(SN.~\@SecondRoll)}\fi\newline
+	\ifdefined\@ThirdStudent
+	\parbox{\textwidth}{\centering\@ThirdStudent~(SN.~\@ThirdRoll)}\fi\newline
+	\ifdefined\@FourthStudent
+	\parbox{\textwidth}{\centering\@FourthStudent~(SN.~\@FourthRoll)}\fi}
+	
+	\def\onlyauthors{\ifdefined\@FirstStudent
+	\parbox{\textwidth}{\centering\bf\@FirstStudent}\fi\newline
+	\ifdefined\@SecondStudent
+	\parbox{\textwidth}{\centering\bf\@SecondStudent}\fi\newline
+	\ifdefined\@ThirdStudent
+	\parbox{\textwidth}{\centering\bf\@ThirdStudent}\fi\newline
+	\ifdefined\@FourthStudent
+	\parbox{\textwidth}{\centering\bf\@FourthStudent}\fi}
+    
+    \author{\authorswithroll}
+% \fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% DO NOT EDIT UNKNOWINGLY: Setting up macros %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\let\thetitle\@title
+\let\theauthor\@author
+\let\theauthorswithroll\authorswithroll
+\let\theonlyauthors\onlyauthors
+\let\theThesisType\@ThesisType
+\let\theStudyType\@StudyType
+\let\thequal\@qualifications
+\let\theroll\@roll
+\let\thedegree\@degree
+\let\thelogo\@logo
+\let\thedept\@dept
+\let\theuniversity\@university
+\let\theMISTcity\@MISTcity
+\let\thesubyear\@date
+\let\thesession\@session
+\let\theDefenseDay\@DefenseDay
+\let\theDefenseDate\@DefenseDate
+%-------------------------------------------------------
+\ifdefined\@FirstStudent
+\let\theFirstStudent\@FirstStudent
+\let\theFirstRoll\@FirstRoll\fi
+\ifdefined\@SecondStudent
+\let\theSecondStudent\@SecondStudent
+\let\theSecondRoll\@SecondRoll\fi
+\ifdefined\@ThirdStudent
+\let\theThirdStudent\@ThirdStudent
+\let\theThirdRoll\@ThirdRoll\fi 
+\ifdefined\@FourthStudent
+\let\theFourthStudent\@FourthStudent
+\let\theFourthRoll\@FourthRoll\fi 
+%
+\let\thesupervisor\@SupervisorName
+\let\thesupervisorAffl\@SupervisorAffiliations
+\let\thesupervisorUni\@SupervisorInstitute
+%
+\let\thehead\@HeadName
+\let\theheadAffl\@HeadAffiliations
+\let\theheadUni\@HeadInstitute
+%
+\let\theInternal\@InternalName
+\let\theInternalAffl\@InternalAffiliations
+\let\theInternalUni\@InternalInstitute
+%
+\let\theExternal\@ExternalName
+\let\theExternalAffl\@ExternalAffiliations
+\let\theExternalUni\@ExternalInstitute
+\let\theExternalCity\@ExternalCity
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% YOUR DOCUMENT STARTS HERE %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	%\fontsize{11}{12.5}\rm 
+	%\fontsize{11.5}{14}\rm
+%	\setlength{\parindent}{0pt} 
+%	\setlength{\parskip}{0.1\baselineskip}
+
+	\makecover % Create the cover page for hard binding cover. It is not a part of your printed pages of the thesis.
+	
+	\makespine % Create the SPINE on the narrow binding side for hard binding cover. It is also not a part of your printed pages of the thesis.
+	
+	% \afterpage{\blankpage}
+	\maketitle % This should be the first page of your thesis.
+	
+
+%% =======================================================
+%%  Front Matter generates automatically that includes  	
+%%  abstracts, approval certificate, ToC, Figure and 
+%%  Table Lists etc.
+%% =======================================================
+	\frontmatter 
+	
+	
+	%--------------------------------
+	% Certificate of examiners
+	\include{chapters/certificate}
+	%\addcontentsline{toc}{chapter}{APPROVAL CERTIFICATE}
+	%\listofalgorithms
+	%--------------------------------
+	
+	%--------------------------------
+	% Statement of Original Authorship
+	%\statementofauthorship
+	\include{chapters/declaration}
+	%\addcontentsline{toc}{chapter}{CANDIDATE'S DECLARATION}
+	%--------------------------------
+	
+	%--------------------------------
+	% Dedication
+	\ifdefined\theStudyType
+	\include{chapters/dedication}\fi
+	%--------------------------------
+	
+		%--------------------------------
+	% Acknowledgements
+	\include{chapters/acknowledgments}
+	%--------------------------------
+	
+	
+	% Abstract
+	\include{chapters/abstractEng}
+	%
+	\addcontentsline{toc}{chapter}{ABSTRACT (BENGALI)}
+	\include{chapters/abstractBangla}
+	
+	%--------------------------------
+	
+	% List of SYmbols/Notations
+	%--------------------------------
+	\include{chapters/notations}
+	%\addcontentsline{toc}{chapter}{List of Symbols}
+	%\addcontentsline{toc}{chapter}{List of Abbreviations}
+	%--------------------------------
+	%--------------------------------
+	% List of Abbreviations
+	%--------------------------------
+	\ifdefined\theStudyType
+	\include{chapters/abbreviations}
+	\fi
+	%\addcontentsline{toc}{chapter}{List of Abbreviations}
+%	%--------------------------------
+	%-------------------------------------
+	\renewcommand\listtablename{LIST OF TABLES}
+	\listoftables
+	%--------------------------------------
+	%% List of Tables and Figures
+	\renewcommand\listfigurename{LIST OF FIGURES}
+	\listoffigures
+	%%--------------------------------------
+	% Table of Contents
+	\tableofcontents
+	%--------------------------------
+	
+	%--------------------------------------
+	
+	%\renewcommand\listalgorithmname{LIST OF ALGORITHMS}  
+	%\let\oldlistofalgorithms\listofalgorithms
+	%\captionsetup[algorithm]{labelsep=colon}
+	%\makeatletter
+	%\renewcommand{\listofalgorithms}{%
+	%\begingroup%
+	%\let\oldnumberline\numberline%
+	%\let\old@dottedtocline\@dottedtocline
+	%\renewcommand{\@dottedtocline}[5]{\old@dottedtocline{##1}{0pt}{##3}{##4}{##5}}%
+	%\renewcommand{\numberline}{Algorithm~\oldnumberline}%
+	%\renewcommand{\cftfigaftersnumb}{\quad:~}
+	%\oldlistofalgorithms%
+	%\endgroup}
+	%\makeatother
+	%
+	%\addcontentsline{toc}{chapter}{LIST OF ALGORITHMS}
+	%\listofalgorithms
+	%%--------------------------------
+	
+
+	
+	
+	%************************************
+	% Main Text
+	\mainmatter{ 
+		%\linespread{6}
+		\doublespacing
+		
+		%--------------------------------
+		% Chapter 1: Introduction
+		\include{chapters/introduction}
+		%--------------------------------
+		
+		
+		%--------------------------------
+		%Chapter 2: Related Works
+		\include{chapters/chapter2}
+		%--------------------------------
+		
+		%--------------------------------
+		% Chapter 3: My Work/contribution
+		\include{chapters/chapter3}
+		%--------------------------------
+		
+		%--------------------------------
+		% Chapter 4: Result and analysis
+		\include{chapters/chapter4}
+		%--------------------------------
+		
+		%--------------------------------
+		% Chapter 5: Conclusion and future work
+		\include{chapters/conclusion}
+		
+	}
+	%--------------------------------
+	
+	%--------------------------------
+	%List of Publications
+	\include{chapters/listofpublications}
+	%\addcontentsline{toc}{chapter}{LIST OF PUBLICATIONS}
+	%\listofpublications 
+	%--------------------------------
+	
+	%--------------------------------
+	% References
+	{\small
+		\bibliographystyle{IEEETran.bst}
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{REFERENCES}
+		\bibliography{MyReferences.bib}
+	}
+	%--------------------------------
+	
+	
+	%--------------------------------
+	% Appendix
+	\appendix
+	\renewcommand\appendixname{APPENDIX}
+	\include{chapters/appendix}
+	%\titlelabel{\thetitle\ - }
+	%--------------------------------
+	%\lstinputlisting{../bfsPVOfullRun.
+	
+	\afterpage{\blankpage}
+\end{document}
