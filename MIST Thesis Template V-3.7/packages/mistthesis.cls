@@ -38,13 +38,157 @@
 %\RequirePackage[utf8x]{inputenc}
 %\RequirePackage[banglamainfont=Kalpurush,  banglattfont=Siyam Rupali]{latexbangla}
 % \RequirePackage{setspace}	% \onehalfspace, 1.5 line spacing
-\usepackage[ linewidth =5 ,%
+\RequirePackage[ linewidth =5 ,%
 linecolor=gray,     
 skipbelow=0 ,
 skipabove =0]{mdframed}
 
 
-%-------------------------------------------------------------
+\RequirePackage{times}
+%\RequirePackage{graphicx}
+\RequirePackage[lq]{packages/mygraphicx}
+\graphicspath{{./figures/}}
+\RequirePackage[immediate]{silence}
+\WarningFilter[temp]{latex}{Command} % silence the warning
+\RequirePackage{sectsty}
+\DeactivateWarningFilters[temp] % So nothing unrelated gets silenced
+
+
+%\RequirePackage{chngcntr} 
+\RequirePackage{titletoc}
+\RequirePackage[toc]{appendix}
+\RequirePackage{xpatch}
+\xpatchcmd{\addappheadtotoc}{%
+	\appendixtocname}{%
+	\texorpdfstring{\MakeUppercase{\appendixtocname}}{}}{}{}
+
+%using symbols from other package without using them
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\DeclareMathSymbol{\nthickapprox}{\mathrel}{symbolsC}{"35}
+\DeclareMathSymbol{\napprox}{\mathrel}{symbolsC}{"30}
+
+%this is for new rule command for chapter abstract
+\newcommand*\varhrulefill[1][0em]{\leavevmode\leaders\hrule height#1\hfill\kern0pt}
+\newcommand{\raisedrule}[2][0.1em]{\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+% \newcommand{\footref}[1]{$^{\ref{#1}}$}
+
+%%% Algorithm packages
+%%  -----------------------
+\RequirePackage{algorithm, algorithmic}
+% \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+% \renewcommand{\algorithmicensure}{\textbf{Output:}}
+% \def\STATEX#1{{\def\alglinenumber##1{}\STATE #1}\addtocounter{ALG@line}{-1}}
+% %
+\newcommand{\func}[1]{\texorpdfstring{\ensuremath{{#1}\left(\cdot\right)}}{Lg}}
+\newcommand{\funcc}[2]{\texorpdfstring{\ensuremath{{#1}\left({#2}\right)}}{Lg}}
+% % \newcommand\Input{\Statex\hspace*{-\algorithmicindent}\textbf{Input(s):~}}
+% % %newcommand for output
+% % \newcommand\Output{\Statex\hspace*{-\algorithmicindent}\textbf{Output(s):~}}
+%this is for hypothesis, remark and definition
+\newtheorem{hypothesis}{Hypothesis}[chapter]
+%\newtheorem{remark}{Remark}[chapter]
+\newtheorem{state}{Statement}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+
+%----------------------------
+%\RequirePackage{epstopdf}
+%\epstopdfDeclareGraphicsRule{.tif}{png}{.png}{convert #1 \OutputFile}
+%\AppendGraphicsExtensions{.tif}
+\newcommand{\footlabel}[2]{%
+	\addtocounter{footnote}{1}%
+	\footnotetext[\thefootnote]{%
+		\addtocounter{footnote}{-1}%
+		\refstepcounter{footnote}\label{#1} #2}$^{\ref{#1}}$}
+
+\RequirePackage{mfirstuc}
+%include the preposition and conjunction used in your thesis title
+\MFUnocap{the}\MFUnocap{and}\MFUnocap{in}\MFUnocap{on}
+\MFUnocap{of}\MFUnocap{for}\MFUnocap{to}\MFUnocap{based}
+\MFUnocap{a}\MFUnocap{an}
+%\MFUnocap{to}\MFUnocap{based}
+
+\RequirePackage[section]{placeins}
+%discourage floats from getting their own page
+\renewcommand\floatpagefraction{.92}
+\renewcommand\topfraction{.92}
+\renewcommand\bottomfraction{.92}
+
+\RequirePackage[final]{pdfpages}
+\RequirePackage[hang, bf, small]{caption}
+\RequirePackage{graphicx, pgfplots}
+\pgfplotsset{grid style={dashed,gray}}
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+
+%this is for algorithmic environment
+\RequirePackage{mathrsfs}
+\RequirePackage[cmex10]{amsmath}\allowdisplaybreaks
+\RequirePackage{amsfonts,  amssymb, array,  mathptmx, mathtools, mdwmath, mdwtab, bigints, amssymb, amsthm, eqparbox}
+
+
+\RequirePackage{hyperref}
+\def\dotsign{\xleaders\hbox to .2em{\d{}}\hfill\d{}}
+\def\dashsign{\xleaders\hbox to .5em{\_}\hfill\_}
+\hypersetup{
+	pageanchor	=	false,
+	colorlinks  = true, %Colours links instead of ugly boxes
+	urlcolor    = black, %blue!30!black, %Colour for external hyperlinks
+	linkcolor   = black, %red!30!black, %Colour of internal links
+	citecolor   = black, %red!30!black %Colour of citations
+}
+
+\RequirePackage{xcolor, color}
+\definecolor{G}{rgb}{0.8,0.8,0.8}
+\RequirePackage[framed, numbered, autolinebreaks, useliterate]{mcode}
+\lstset{  
+	backgroundcolor=\color{white},
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=10pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{G},
+	rulecolor=\color{G}
+}
+
+\RequirePackage{pdflscape}
+\RequirePackage{breqn}
+
+\RequirePackage{setspace, sectsty}
+% \RequirePackage{setspace}
+\RequirePackage[nonindentfirst, bottomtitles, compact, raggedright]{titlesec}
+\setdisplayskipstretch{0.5}
+
+%\baselineskip=15pt
+\renewcommand{\chaptername}{CHAPTER}
+\titleformat{\chapter}[display]
+{\large \bfseries \centering\setstretch{1}}{\chaptertitlename\ \thechapter}{-13pt}{\large}
+\titlespacing*{\chapter}{-20pt}{-20pt}{25pt}
+\titlespacing{\section}{0pt}{0.1\parskip}{-0.7\parskip}
+\titlespacing{\subsection}{0pt}{0.15\parskip}{-0.7\parskip}
+\titlespacing{\subsubsection}{0pt}{0.35\parskip}{-0.7\parskip}
+\allsectionsfont{\singlespacing}
+%\chapterfont{\centering\fontsize{14}{16}\selectfont}
+\titleformat{\section}{\fontsize{14}{14}\selectfont\bfseries}{\thesection}{1.2em}{}
+\titleformat{\subsection}{\fontsize{13}{13}\selectfont\bfseries}{\thesubsection}{1.2em}{}
+\titleformat{\subsubsection}{\fontsize{12}{12}\selectfont\bfseries}{\thesubsubsection}{1.2em}{}
+
+
+\RequirePackage[subfigure, titles]{tocloft}
+\newlength\mylength
+\settowidth\mylength{0.0001\cftfigpresnum\cftfigaftersnum}
+\renewcommand\cftfigpresnum{\figurename~}
+\renewcommand\cftfigaftersnum{:}
+\addtolength\cftfignumwidth{\mylength}
+% 
+\renewcommand\cfttabpresnum{\tablename~}
+\renewcommand\cfttabaftersnum{:}
+\settowidth\mylength{\cfttabpresnum\cfttabaftersnum}
+\addtolength\cfttabnumwidth{\mylength}
+
+\AtBeginEnvironment{equation}{\leavevmode\singlespace}
+\AfterEndEnvironment{equation}{\endsinglespace\vskip0.5\baselineskip\noindent\ignorespaces}
+
+\pdfminorversion=3
+
+%===========================================
 % \newcommand{\onlyauthors}{\author}
 % \newcommand{\authorswithroll}{\author}
 % Set Margins Command
@@ -79,7 +223,8 @@ skipabove =0]{mdframed}
 %---------------------------------------------------------------
 % Set Margins
 \headheight=14.5pt
-\setmargins{33mm}{25mm}{25mm}{20mm}
+\setmargins{28mm}{25mm}{25mm}{20mm}
+\addtolength{\topmargin}{-6pt}
 
 %---------------------------------------------------------------
 % Header and Footer Style
@@ -92,15 +237,17 @@ skipabove =0]{mdframed}
 		\fancyhead[R]{\itshape{\nouppercase{\rightmark}}}
 		\fancyfoot[R]{\thepage}
 	\else
-		\fancyhead[LE]{\itshape{\nouppercase{\leftmark}}}
+		%\fancyhead[LE]{\itshape{\nouppercase{\leftmark}}}
 		\fancyhead[RO]{\itshape{\nouppercase{\rightmark}}}
-		\fancyfoot[CE,CO]{\thepage}
+		%\fancyfoot[CE,CO]{\thepage}
+		\fancyfoot[C]{\thepage}
 	\fi
 \fancypagestyle{plain}{
 	\fancyhf{}
 	\renewcommand{\headrulewidth}{0pt}
 	\if@draft \fancyfoot[R]{\thepage}
-	\else \fancyfoot[CE,CO]{\thepage} \fi
+	\else %\fancyfoot[CE,CO]{\thepage} 
+	\fancyfoot[C]{\thepage} \fi
 }
 
 
@@ -293,22 +440,22 @@ skipabove =0]{mdframed}
 		\put(0,-35){\parbox[t]{\textwidth}{
 			\centering 
 			%{\Huge\@title} 
-			{\Large\mdseries \MakeUppercase{\LARGE\bf\@title}} \\[40mm]}}
-		\put(0,-145){\parbox[t]{\textwidth}{
+			{\Large\mdseries \MakeUppercase{\LARGE\bf\@title}} \\[50mm]}}
+		\put(0,-160){\parbox[t]{\textwidth}{
 			\centering
 			\MakeUppercase{\bf\Large\onlyauthors} \\
 			}}
-		\put(0,-280){\parbox[t]{\textwidth}{
+		\put(0,-300){\parbox[t]{\textwidth}{
 			\centering
 			\setstretch{1}
 			\parbox{0.85\textwidth}{\centering\bf\Large\MakeUppercase{\theThesisType}}
 			 \\[35mm]
 			\ifx\@logo\@empty\else
-				\parbox{\textwidth}{\centering\@logo}\fi\\[18pt]
+				\parbox{\textwidth}{\centering\@logo}\fi\\[20pt]
 			\parbox{\textwidth}{\centering\bf\MakeUppercase{\large\@dept}}\\[1.5ex]
 			\parbox{\textwidth}{\centering\bf\MakeUppercase{\large\@university}\\
 
-			\MakeUppercase{\large\bf\@MISTcity}}\\[15mm]
+			\MakeUppercase{\large\bf\@MISTcity}}\\[20mm]
 
 \MakeUppercase{\Large\bf\@DefenseDate}
   %\mydate\today
@@ -349,24 +496,24 @@ skipabove =0]{mdframed}
 		\put(0,-35){\parbox[t]{\textwidth}{
 			\centering 
 			%{\Huge\@title} 
-			{\Large\mdseries \MakeUppercase{\@title}} \\[40mm]}}
-		\put(0,-145){\parbox[t]{\textwidth}{
+			{\Large\mdseries \MakeUppercase{\@title}} \\[50mm]}}
+		\put(0,-160){\parbox[t]{\textwidth}{
 			\setstretch{1}
 			\centering
 			\MakeUppercase{\@author} \\
 			}}
-		\put(0,-280){\parbox[t]{\textwidth}{
+		\put(0,-300){\parbox[t]{\textwidth}{
 			\centering
 			\setstretch{1}
 			\parbox{0.8\textwidth}{\centering A Thesis Submitted in Partial Fulfilment of the Requirements for the \\
 			{Degree of~\@degree}}
-			 \\[35mm]
+			 \\[37mm]
 			\ifx\@logo\@empty\else
-				\parbox{\textwidth}{\centering\@logo}\fi\\[18pt]
+				\parbox{\textwidth}{\centering\@logo}\fi\\[20pt]
 			\parbox{0.7\textwidth}{\centering\MakeUppercase{\@dept}}\\[1ex]
 			\parbox{\textwidth}{\centering\MakeUppercase{\@university}\\
 
-			\MakeUppercase{\@MISTcity}}\\[15mm]
+			\MakeUppercase{\@MISTcity}}\\[20mm]
 
 \MakeUppercase{\@DefenseDate}
   %\mydate\today
@@ -436,7 +583,7 @@ skipabove =0]{mdframed}
 
 
 
-\usepackage{xspace}
+\RequirePackage{xspace}
 \makeatletter
 \DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
 \def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}

@@ -20,7 +20,7 @@
 
 
 %\section*{Board of Examiners}
-\vspace{4ex}
+\vspace{\ifdefined\theStudyType 4ex \else 8ex\fi}
 
 
 \begin{table*}[!h]
@@ -31,15 +31,17 @@
 		\thesupervisor &  \hspace{1.5cm} &Chairman \\
 		\thesupervisorAffl & \hspace{1.5cm} &(Supervisor)\\
 		\thesupervisorUni,~\theMISTcity &  \hspace{1.5cm} &\ifdefined\theStudyType Board of Examination\fi\\
-			\vspace{4ex}\\
+			\vspace{\ifdefined\theStudyType 4ex \else 8ex\fi}\\
 %
 %
+\ifdefined\theStudyType%
 		\makebox[70mm]{\hrulefill}& \hspace{1.5cm} &\\
 		%\cline{2-2}\\
 		 \theInternal &  \hspace{1.5cm} &Member\\
 		 \theInternalAffl & \hspace{1.5cm} &(Internal)\\
 		 \theInternalUni,~\theMISTcity &  \hspace{1.5cm} &\ifdefined\theStudyType Board of Examination\fi\\
 		\vspace{4ex}\\
+		\fi
 %
 %
 		\makebox[70mm]{\hrulefill}& \hspace{1.5cm} &\\
@@ -47,7 +49,7 @@
 		 \thehead   &  \hspace{1.5cm} &Member\\
 		\theheadAffl & \hspace{1.5cm} &(Ex-officio)\\
 		 \theheadUni,~\theMISTcity &  \hspace{1.5cm} &\ifdefined\theStudyType Board of Examination\fi\\
-		\vspace{4ex}\\
+		\vspace{\ifdefined\theStudyType 4ex \else 8ex\fi}\\
 		%	
 %
 \ifdefined\theStudyType%
@@ -63,7 +65,7 @@
 
 
 \vfill
-{\noindent\parbox{\textwidth}{\centering\thedept\newline MIST, Dhaka}
+{\parbox{\textwidth}{\centering\quad\thedept\newline MIST, Dhaka}
 %
 %2. $---------------------------$ \hfill Member\\
 %\quad Gp Capt Md Hossam-E-Haider, PhD, BAF \hfill (Ex-officio)\\
