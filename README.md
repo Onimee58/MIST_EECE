@@ -15,6 +15,6 @@
 <br>
 <B>Created by <br>
 Lt. Col. Hussain Md. Abu Nyeem, Phd <br>
-Associate Professor, EECE, MIST</b>
-and
-Md. Saif Hassan Onim
+Associate Professor, EECE, MIST<br>
+and<br>
+Md. Saif Hassan Onim<br></b>
